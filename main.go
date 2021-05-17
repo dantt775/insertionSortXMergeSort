@@ -12,15 +12,17 @@ func main() {
 	if err != nil {
 		log.Fatalf("error creating file: %v", err)
 	}
-	defer f.Close()
 	log.SetOutput(f)
+	f.Close()
+
+	log.SetFlags(log.Lmicroseconds)
 
 	started := time.Now()
-	log.Println("----------------------\nStarted at", started.Format("02-01-2006 - 15:04:05"))
+	log.Println("Start")
 
 	time.Sleep(5 * time.Second)
 
-	log.Println("Finished at", time.Now().Format("02-01-2006 - 15:04:05"))
+	log.Println("Finished")
 	timeElapsed := time.Since(started)
-	log.Printf("Duration: %.2f seconds.\n----------------------\n", timeElapsed.Seconds())
+	log.Printf("Duration: %f seconds.\n", timeElapsed.Seconds())
 }
